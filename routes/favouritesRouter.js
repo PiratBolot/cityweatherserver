@@ -1,4 +1,6 @@
 import express from 'express';
+import * as repo from '../repository/favouritesRepository'
+import {getWeatherByCityName} from "../weatherAPI/WeatherApi";
 
 export default () =>
     express.Router()
@@ -15,7 +17,7 @@ export default () =>
                     res.status(400).json({error: "name is undefined"});
                     return;
                 }
-                const result = await weatherApiByCity(req.body.name);
+                const result = await getWeatherByCityName(req.body.name);
                 if (result && result.status === "fail") {
                     res.status(result.response.cod).json({error: result.response});
                     return;

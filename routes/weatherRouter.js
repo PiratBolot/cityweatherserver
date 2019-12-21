@@ -1,4 +1,5 @@
 import express from 'express';
+import {getWeatherByCityName, getWeatherByCoords} from "../weatherAPI/WeatherApi";
 
 export default () =>
     express.Router()
@@ -7,15 +8,11 @@ export default () =>
                     res.json({error: "city is undefined"});
                     return;
                 }
-                const result = await weatherApiByCity(req.query.city);
+                const result = await getWeatherByCityName(req.query.city);
                 if (result.status === "ok")
                     res.json(result.response);
                 else
                     res.status(result.response.cod).json({error: "weather api fail", result: result.response});
-            }
-        )
-        .get('/id', async (req, res) => {
-
             }
         )
         .get('/coordinates', async (req, res) => {
@@ -28,7 +25,7 @@ export default () =>
                     return;
                 }
 
-                const result = await weatherApiByCoords({latitude: req.query.lat, longitude: req.query.lon});
+                const result = await getWeatherByCoords({latitude: req.query.lat, longitude: req.query.lon});
                 if (result.status === "ok")
                     res.json(result.response);
                 else
