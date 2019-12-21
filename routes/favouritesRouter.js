@@ -6,7 +6,7 @@ export default () =>
     express.Router()
         .get('/', async (req, res) => {
                 try {
-                    res.json(await repo.getCities());
+                    await res.json(await repo.getCities());
                 } catch (e) {
                     res.status(400).json({error: e.message})
                 }
@@ -24,7 +24,7 @@ export default () =>
                 }
                 try {
                     await repo.addCity(req.body.name);
-                    res.json({result: "OK"});
+                    await res.json({result: "OK"});
                 } catch (e) {
                     res.status(400).json({error: e.message})
                 }
@@ -37,7 +37,7 @@ export default () =>
                 }
                 try {
                     await repo.deleteCity(req.body.name);
-                    res.json({result: "OK"});
+                    await res.json({result: "OK"});
                 } catch (e) {
                     res.status(400).json({error: e.message})
                 }

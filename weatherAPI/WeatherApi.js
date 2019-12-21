@@ -26,12 +26,6 @@ const getWeatherByCityName = async (city) => (
     )
 );
 
-const getWeatherById = async (id) => (
-    toJson(
-        fetch("https://api.openweathermap.org/data/2.5/weather?id=" + id + "&appid=" + config.API_KEY + "&lang=ru")
-    )
-);
-
 const getWeatherByCoords = async (coords) => (
     toJson(
         fetch(
@@ -55,4 +49,4 @@ const parseWeatherResponse = (res) => (
     ]
 );
 
-export {getWeatherByCityName, getWeatherByCoords, getWeatherById, parseWeatherResponse};
+export {getWeatherByCityName, getWeatherByCoords, parseWeatherResponse};
