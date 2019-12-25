@@ -9,10 +9,10 @@ export default () =>
                     return;
                 }
                 const result = await getWeatherByCityName(req.query.city);
-                if (result.status === "ok")
+                if (result.status === "200")
                     res.json(result.response);
                 else
-                    res.status(result.response.cod).json({error: "weather api fail", result: result.response});
+                    res.status(result.response.cod).json({cod: result.status, result: result.response});
             }
         )
         .get('/coordinates', async (req, res) => {
@@ -24,9 +24,8 @@ export default () =>
                     res.json({error: "lon is undefined"});
                     return;
                 }
-
                 const result = await getWeatherByCoords({latitude: req.query.lat, longitude: req.query.lon});
-                if (result.status === "ok")
+                if (result.status === "200")
                     res.json(result.response);
                 else
                     res.status(result.response.cod).json({error: "weather api fail", result: result.response});

@@ -10,7 +10,6 @@ const toJson = (promise) => (
             return response;
         },
         (e) => {
-            console.log("Получили битые данные");
         }
     ).then(
         async (response) => {
@@ -22,7 +21,7 @@ const toJson = (promise) => (
 
 const getWeatherByCityName = async (city) => (
     toJson(
-        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + config.weatherApi.API_KEY + "&lang=ru")
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + config.weatherApi.API_KEY)
     )
 );
 
@@ -30,7 +29,7 @@ const getWeatherByCoords = async (coords) => (
     toJson(
         fetch(
         "https://api.openweathermap.org/data/2.5/weather?lat=" + coords.latitude
-        + "&lon=" + coords.longitude + "&appid=" + config.weatherApi.API_KEY + "&lang=ru"
+        + "&lon=" + coords.longitude + "&appid=" + config.weatherApi.API_KEY
         )
     )
 );

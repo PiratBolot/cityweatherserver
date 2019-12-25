@@ -18,7 +18,7 @@ export default () =>
                     return;
                 }
                 const result = await getWeatherByCityName(req.body.name);
-                if (result && result.status === "fail") {
+                if (result && result.status !== "200") {
                     res.status(result.response.cod).json({error: result.response});
                     return;
                 }
